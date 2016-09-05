@@ -1,0 +1,55 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<script>
+var creationData = [];
+
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'area'
+        },
+        title: {
+            text: 'AppKit views creation'
+        },
+        xAxis: {
+          title: {
+              text: 'N of elements'
+          },
+          labels: {
+              formatter: function () {
+                  return this.value;
+              }
+          }
+        },
+        yAxis: {
+            title: {
+                text: 'ms'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value;
+                }
+            }
+        },
+        tooltip: {
+            shared: true,
+            valueSuffix: ' ms'
+        },
+        plotOptions: {
+            area: {
+                stacking: 'normal',
+                lineColor: '#666666',
+                lineWidth: 1,
+                marker: {
+                    lineWidth: 1,
+                    lineColor: '#666666'
+                }
+            }
+        },
+        series: creationData
+    });
+});
+</script>
