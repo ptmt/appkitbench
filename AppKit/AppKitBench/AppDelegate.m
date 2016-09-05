@@ -49,7 +49,7 @@
     NSMutableArray *creation = [[NSMutableArray alloc] init];
     NSMutableArray *resize = [[NSMutableArray alloc] init];
     SEL method = NSSelectorFromString(methodToMeasure);
-    for (int N = 10; N<10000; N+=100) {
+    for (int N = 100; N<10000; N+=200) {
         CFTimeInterval elapsedTime = [[self performSelector:method
                                                  withObject:[NSNumber numberWithInt:N]] doubleValue];
         [creation addObject:@[@(N), @(elapsedTime)]];
@@ -68,7 +68,7 @@
     // Insert code here to tear down your application
 }
 
-- (CFTimeInterval)addVanillaViewsAtTopLevel:(NSNumber *)N {
+- (NSNumber *)addVanillaViewsAtTopLevel:(NSNumber *)N {
     CFTimeInterval startTime = CACurrentMediaTime();
     for (int i = 0; i < [N intValue]; i++) {
         NSView *subview = [[NSView alloc] initWithFrame:[self calcRect:_window.frame]];
@@ -76,10 +76,10 @@
     }
     CFTimeInterval elapsedTime = CACurrentMediaTime() - startTime;
     //NSLog(@"addVanillaViewsAtTopLevel: Created %@ views in %f ms", N, elapsedTime);
-    return elapsedTime;
+    return [NSNumber numberWithInt:elapsedTime];
 }
 
-- (CFTimeInterval)addVanillaViewsAsATree:(NSNumber *)N {
+- (NSNumber *)addVanillaViewsAsATree:(NSNumber *)N {
     CFTimeInterval startTime = CACurrentMediaTime();
     NSView *currentView =_window.contentView;
     for (int i = 0; i < [N intValue]; i++) {
@@ -89,10 +89,10 @@
     }
     CFTimeInterval elapsedTime = CACurrentMediaTime() - startTime;
     //NSLog(@"addVanillaViewsAsATree: Created %@ views in %f ms", N, elapsedTime);
-    return elapsedTime;
+    return [NSNumber numberWithInt:elapsedTime];
 }
 
-- (CFTimeInterval)addLayerHostingViews:(NSNumber *) N {
+- (NSNumber *)addLayerHostingViews:(NSNumber *) N {
     CFTimeInterval startTime = CACurrentMediaTime();
     NSView *currentView =_window.contentView;
     for (int i = 0; i < [N intValue]; i++) {
@@ -105,10 +105,10 @@
     }
     CFTimeInterval elapsedTime = CACurrentMediaTime() - startTime;
     //NSLog(@"addLayerHostingViews, Created in %f ms", elapsedTime);
-    return elapsedTime;
+    return [NSNumber numberWithInt:elapsedTime];
 }
 
-- (CFTimeInterval)addLayerHostingViewsWithPolicy:(NSNumber *) N {
+- (NSNumber *)addLayerHostingViewsWithPolicy:(NSNumber *) N {
     CFTimeInterval startTime = CACurrentMediaTime();
     NSView *currentView =_window.contentView;
     for (int i = 0; i < [N intValue]; i++) {
@@ -122,10 +122,10 @@
     }
     CFTimeInterval elapsedTime = CACurrentMediaTime() - startTime;
     //NSLog(@"addLayerHostingViews, Created in %f ms", elapsedTime);
-    return elapsedTime;
+    return [NSNumber numberWithInt:elapsedTime];
 }
 
-- (CFTimeInterval)addLayerBackedViews:(NSNumber *) N {
+- (NSNumber *)addLayerBackedViews:(NSNumber *) N {
     CFTimeInterval startTime = CACurrentMediaTime();
     NSView *currentView =_window.contentView;
     for (int i = 0; i < [N intValue]; i++) {
@@ -136,10 +136,10 @@
     }
     CFTimeInterval elapsedTime = CACurrentMediaTime() - startTime;
     //NSLog(@"addLayerBackedViews, Created in %f ms", elapsedTime);
-    return elapsedTime;
+    return [NSNumber numberWithInt:elapsedTime];
 }
 
-- (CFTimeInterval)addLayerBackedViewsWithPolicy:(NSNumber *) N {
+- (NSNumber *)addLayerBackedViewsWithPolicy:(NSNumber *) N {
     CFTimeInterval startTime = CACurrentMediaTime();
     NSView *currentView =_window.contentView;
     for (int i = 0; i < [N intValue]; i++) {
@@ -151,7 +151,7 @@
     }
     CFTimeInterval elapsedTime = CACurrentMediaTime() - startTime;
     // NSLog(@"addLayerBackedViewsWithPolicy, Created in %f ms", elapsedTime);
-    return elapsedTime;
+    return [NSNumber numberWithInt:elapsedTime];
 }
 
 - (void)clearAllViews {
