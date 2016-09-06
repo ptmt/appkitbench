@@ -6,6 +6,10 @@
 
 <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
+<div id="container3" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<div id="container4" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
 <script>
 $(function () {
     $.getJSON('./10.11_creation_timings.json?=' + new Date(), function(data) {
@@ -111,6 +115,108 @@ $(function () {
           series: resizingData
       });
     })
+    $.getJSON('./10.12_creation_timings.json?=' + new Date(), function(data) {
+      const creationData = data.map(d => {
+        return {
+          name: d.name,
+          data: d.creation
+        }
+      })
+      const resizingData = data.map(d => {
+        return {
+          name: d.name,
+          data: d.resize
+        }
+      })
+      $('#container3').highcharts({
+          chart: {
+              type: 'line'
+          },
+          title: {
+              text: 'AppKit views creation macOS 10.12'
+          },
+          xAxis: {
+            title: {
+                text: 'N of elements'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value;
+                }
+            }
+          },
+          yAxis: {
+              title: {
+                  text: 'ms'
+              },
+              labels: {
+                  formatter: function () {
+                      return this.value;
+                  }
+              }
+          },
+          tooltip: {
+              shared: true,
+              valueSuffix: ' ms'
+          },
+          plotOptions: {
+              area: {
+                  stacking: 'normal',
+                  lineColor: '#666666',
+                  lineWidth: 1,
+                  marker: {
+                      lineWidth: 1,
+                      lineColor: '#666666'
+                  }
+              }
+          },
+          series: creationData
+      });
 
+      $('#container4').highcharts({
+          chart: {
+              type: 'line'
+          },
+          title: {
+              text: 'AppKit views resizing macOS 10.12'
+          },
+          xAxis: {
+            title: {
+                text: 'N of elements'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value;
+                }
+            }
+          },
+          yAxis: {
+              title: {
+                  text: 'ms'
+              },
+              labels: {
+                  formatter: function () {
+                      return Math.round(this.value * 100) / 100;
+                  }
+              }
+          },
+          tooltip: {
+              shared: true,
+              valueSuffix: ' ms',
+          },
+          plotOptions: {
+              area: {
+                  stacking: 'normal',
+                  lineColor: '#666666',
+                  lineWidth: 1,
+                  marker: {
+                      lineWidth: 1,
+                      lineColor: '#666666'
+                  }
+              }
+          },
+          series: resizingData
+      });
+    })
 });
 </script>

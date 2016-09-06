@@ -37,7 +37,7 @@
                         dataWithJSONObject:creationDictionary
                         options:NSJSONWritingPrettyPrinted error:&writeError];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    [jsonString writeToFile:@"creation_timings.json"
+    [jsonString writeToFile:@"10.12_creation_timings.json"
         atomically:NO
         encoding:NSStringEncodingConversionAllowLossy
         error:&writeError];
